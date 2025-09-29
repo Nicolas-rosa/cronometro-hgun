@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronômetro Neumorphism</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container neumorphic-shadow">
+        <div class="main-content">
+            <div class="header">
+                <h1>Cronômetro</h1>
+            </div>
+
+            <div id="display" class="display neumorphic-inset">00:00:00</div>
+            
+            <div class="controls">
+                <button id="startStopBtn" class="neumorphic-btn start-btn">Iniciar</button>
+                <button id="resetBtn" class="neumorphic-btn reset-btn">Zerar</button>
+                <button id="forwardBtn" class="neumorphic-btn adjust-btn">Avançar 10s</button>
+                <button id="backwardBtn" class="neumorphic-btn adjust-btn">Retroceder 10s</button>
+            </div>
+            
+            <div class="set-stop-time neumorphic-shadow">
+                <label for="stopTime">Parar em (HH:MM:SS):</label>
+                <input type="text" id="stopTime" placeholder="Ex: 00:01:30" class="neumorphic-input">
+                <button id="setStopBtn" class="neumorphic-btn set-btn">Definir Parada</button>
+                <p id="stopMessage"></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
