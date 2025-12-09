@@ -1,306 +1,258 @@
-/* Paleta de Cores para Neumorfismo */
+/* ---------- Paleta ---------- */
 :root {
-    --bg-color: #e0e5ec; /* Cor de fundo principal (clara) */
-    --main-color: #2c3e50; /* Cor principal (texto/detalhes - azul militar) */
-    --shadow-light: #ffffff; /* Sombra clara */
-    --shadow-dark: #a3b1c6; /* Sombra escura */
-    --sidebar-color: #34495e; /* Fundo da Sidebar */
+    --bg-color: #ffffff;
+    --main-color: #2c3e50;
+    --sidebar-color: #34495e;
+    --border-color: #c9d0da;
 }
 
-/* Mixin de Neumorfismo */
-/* O mixin .neumorphic-shadow não foi definido, então as sombras foram aplicadas diretamente onde referenciadas. */
-
-.neumorphic-inset {
-    box-shadow: inset 3px 3px 6px var(--shadow-dark),
-                inset -3px -3px 6px var(--shadow-light);
-}
-
+/* ---------- Layout geral ---------- */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
     background-color: var(--bg-color);
+    overflow: hidden; /* Isso corta o que sai da tela */
 }
 
 .container {
+    position: relative;
     display: flex;
-    background-color: var(--bg-color);
-    border-radius: 20px;
-    padding: 0;
-    overflow: hidden;
+    background: var(--bg-color);
+    border-radius: 18px;
+    overflow: visible;
     width: 800px;
     max-width: 95%;
+    transition: width 0.3s ease;
 }
 
-/* ------------------- Sidebar ------------------- */
-.sidebar {
-    width: 150px;
-    background-color: var(--sidebar-color); /* Azul escuro */
-    color: var(--bg-color);
-    display: flex;
-    flex-direction: column;
-    padding: 30px 10px;
-    box-sizing: border-box;
-    border-radius: 20px 0 0 20px;
-}
-
-.sidebar a {
-    color: var(--bg-color);
-    text-decoration: none;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-align: center;
-    /* Reset de cores e aplicação de neumorfismo */
-    background: none; 
-    border: none;
-    padding: 15px 10px;
-    border-radius: 10px;
-}
-
-.sidebar .neumorphic-btn {
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
-                -5px -5px 10px rgba(255, 255, 255, 0.2);
-    transition: all 0.2s ease;
-}
-
-.sidebar .neumorphic-btn:hover {
-    transform: translateY(-7px); /* Efeito de elevação do uiverse.io */
-}
-
-.sidebar .neumorphic-btn:active {
-    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.3),
-                inset -3px -3px 6px rgba(255, 255, 255, 0.1);
-    transform: translateY(-1px); /* Efeito de click do uiverse.io */
-}
-
-.sidebar .help-button {
-    background-color: #f39c12; /* Laranja */
-}
-
-.sidebar .help-button:hover {
-    background-color: #e67e22; /* Laranja ligeiramente mais escuro no hover */
-    color: white; /* Cor do texto branca para contraste */
-    box-shadow: 0px 15px 20px rgba(243, 156, 18, 0.4); /* Sombra de brilho laranja */
-}
-
-.sidebar .call-button {
-    background-color: #27ae60; /* Verde */
-}
-
-.sidebar .call-button:hover {
-    background-color: #229954; /* Verde ligeiramente mais escuro no hover */
-    color: white; /* Cor do texto branca para contraste */
-    box-shadow: 0px 15px 20px rgba(39, 174, 96, 0.4); /* Sombra de brilho verde */
-}
-
-/* ------------------- Conteúdo Principal ------------------- */
+/* ---------- Conteúdo principal ---------- */
 .main-content {
     flex-grow: 1;
     padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 2; /* Texto fica ACIMA das logos */
 }
 
 .header {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     margin-bottom: 30px;
-}
-
-.logo img {
-    width: 60px; 
-    height: auto;
-    border-radius: 50%; /* Borda arredondada para logos */
-    /* .neumorphic-shadow; aplicando a sombra diretamente */
-    box-shadow: 5px 5px 10px var(--shadow-dark),
-                -5px -5px 10px var(--shadow-light);
-}
-
-.left-logo {
-    margin-right: 20px;
-}
-
-.right-logo {
-    margin-left: 20px;
 }
 
 h1 {
     color: var(--main-color);
     font-size: 1.8em;
-    font-weight: 500;
+    font-weight: 600;
     margin: 0;
-    white-space: nowrap; /* Impede a quebra de linha do título */
 }
 
-/* ------------------- Display Neumorphic ------------------- */
+/* ---------- Display ---------- */
 .display {
     font-size: 4em;
-    font-weight: 400;
-    margin-bottom: 30px;
-    padding: 20px 40px;
-    border-radius: 15px;
+    padding: 18px 35px;
+    border-radius: 12px;
+    margin-bottom: 25px;
     color: var(--main-color);
-    min-width: 280px;
+    background: var(--bg-color);
+    border: 2px solid var(--border-color);
     text-align: center;
-    background-color: var(--bg-color);
-    .neumorphic-inset; /* Sombra interna para parecer "afundado" */
+    min-width: 260px;
 }
 
-/* ------------------- Botões Neumorphic ------------------- */
+/* ---------- Botões ---------- */
 .controls {
     margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
 .neumorphic-btn {
-    background-color: var(--bg-color);
+    background: var(--bg-color);
+    border: 2px solid var(--border-color);
     color: var(--main-color);
-    border: none;
-    padding: 12px 18px;
-    margin: 0 5px;
-    border-radius: 10px;
+    padding: 10px 16px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.95em;
     font-weight: 600;
-    transition: all 0.2s ease; /* Transição existente */
-    /* Adicionando a sombra neumórfica base explicitamente */
-    box-shadow: 5px 5px 10px var(--shadow-dark),
-                -5px -5px 10px var(--shadow-light);
+    font-size: 1rem;
+    transition: 0.2s ease;
 }
 
-/* Removida a regra genérica de cor no hover para permitir cores específicas */
-/* .neumorphic-btn:hover {
-    color: #4CAF50; 
-} */
-
 .neumorphic-btn:hover {
-    transform: translateY(-7px); /* Efeito de elevação do uiverse.io */
-    /* A sombra de brilho será adicionada aos botões individuais abaixo */
+    background: #dce2eb;
+    transform: translateY(-2px);
 }
 
 .neumorphic-btn:active {
-    .neumorphic-inset; /* Efeito "pressionado" existente */
-    transform: translateY(-1px); /* Efeito de click do uiverse.io */
+    transform: translateY(0);
 }
 
-/* Cores específicas para os botões e seus hovers */
-.start-btn { color: #1abc9c; } 
-.start-btn:hover {
-    box-shadow: 0px 15px 20px rgba(26, 188, 156, 0.4), /* Sombra de brilho verde-água */
-                5px 5px 10px var(--shadow-dark),
-                -5px -5px 10px var(--shadow-light); /* Combinada com a sombra neumórfica base */
-}
-
-.reset-btn { color: #e74c3c; } 
-.reset-btn:hover {
-    box-shadow: 0px 15px 20px rgba(231, 76, 60, 0.4), /* Sombra de brilho vermelho */
-                5px 5px 10px var(--shadow-dark),
-                -5px -5px 10px var(--shadow-light);
-}
-
+.start-btn { color: #1abc9c; }
+.reset-btn { color: #e74c3c; }
 .adjust-btn { color: #3498db; }
-.adjust-btn:hover {
-    box-shadow: 0px 15px 20px rgba(52, 152, 219, 0.4), /* Sombra de brilho azul */
-                5px 5px 10px var(--shadow-dark),
-                -5px -5px 10px var(--shadow-light);
-}
-
 .set-btn { color: #9b59b6; }
-.set-btn:hover {
-    box-shadow: 0px 15px 20px rgba(155, 89, 182, 0.4), /* Sombra de brilho roxo */
-                5px 5px 10px var(--shadow-dark),
-                -5px -5px 10px var(--shadow-light);
-}
 
-/* ------------------- Definir Parada ------------------- */
+/* ---------- Definir Parada ---------- */
 .set-stop-time {
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 15px;
-    background-color: var(--bg-color);
-    /* .neumorphic-shadow; aplicando a sombra diretamente */
-    box-shadow: 5px 5px 10px var(--shadow-dark),
-                -5px -5px 10px var(--shadow-light); /* Efeito de "cartão flutuante" */
+    margin-top: 25px;
+    padding: 18px;
+    border-radius: 12px;
+    background: var(--bg-color);
+    border: 2px solid var(--border-color);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .set-stop-time label {
-    font-size: 1em;
-    margin-bottom: 15px;
     color: var(--main-color);
+    margin-bottom: 10px;
 }
 
 .neumorphic-input {
     padding: 10px;
-    border: none;
+    border: 2px solid var(--border-color);
+    background: var(--bg-color);
+    color: var(--main-color);
     border-radius: 8px;
-    font-size: 1em;
     width: 120px;
     text-align: center;
-    margin-bottom: 15px;
-    background-color: var(--bg-color);
-    .neumorphic-inset; /* Input "afundado" */
-    color: var(--main-color);
-    outline: none; /* Remove a borda padrão de foco */
-}
-
-.set-stop-time .set-btn {
-    margin-left: 0;
+    outline: none;
+    font-size: 1rem;
 }
 
 #stopMessage {
-    margin-top: 15px;
+    margin-top: 12px;
     font-weight: bold;
-    color: #c0392b; /* Vermelho escuro para a mensagem de parada */
-    font-size: 0.9em;
+    color: #c0392b;
+    font-size: 1.2rem;
 }
 
-/* Correção para o botão definir parada ficar ao lado do input em telas maiores */
-@media (min-width: 600px) {
-    .set-stop-time {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .set-stop-time label {
-        margin-bottom: 0;
-    }
-    
-    .neumorphic-input {
-        margin-bottom: 0;
-    }
-}
-/* Animação para piscar em vermelho */
 @keyframes blinkRed {
-    0% { 
-        color: var(--main-color); /* Cor normal do texto */
-        background-color: var(--bg-color);
-        box-shadow: inset 3px 3px 6px var(--shadow-dark),
-                    inset -3px -3px 6px var(--shadow-light);
-    }
-    50% { 
-        color: #f31800; /* Vermelho forte para o texto */
-        background-color: #ff9999; /* Fundo ligeiramente avermelhado */
-        box-shadow: inset 3px 3px 6px rgba(255, 25, 0, 0.4), /* Sombra vermelha */
-                    inset -3px -3px 6px var(--shadow-light);
-    }
-    100% { 
-        color: var(--main-color);
-        background-color: var(--bg-color);
-        box-shadow: inset 3px 3px 6px var(--shadow-dark),
-                    inset -3px -3px 6px var(--shadow-light);
-    }
+    0%, 100% { color: var(--main-color); background: var(--bg-color); }
+    50% { color: #f31800; background: #ffaaaa; }
 }
 
 .display.blink-red {
-    animation: blinkRed 0.8s ease-in-out infinite; /* Aplica a animação, 0.8s, repete infinitamente */
+    animation: blinkRed 0.8s infinite;
+}
+
+/* ==================== LOGOS FLUTUANTES (PADRÃO DESKTOP) ==================== */
+
+.floating-logo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;          
+    pointer-events: none;   
+    object-fit: contain;
+    z-index: 1; /* Fica ATRÁS do texto */
+}
+
+.floating-left {
+    left: -4vw;
+    width: 18vw;
+    max-width: 170px; 
+}
+
+.floating-right {
+    right: -9vw;
+    width: 20vw;
+    max-width: 240px;
+}
+
+/* ==========================================================================
+   CORREÇÃO DE CORTE (Telas < 950px)
+   ========================================================================== */
+@media (max-width: 950px) {
+    /* 
+       Aqui está a correção: Trazemos as logos para DENTRO do container.
+       Elas ficarão como "marca d'água" atrás do texto, sem serem cortadas.
+    */
+    .floating-left {
+        width: 16vw;      
+        min-width: 80px;  
+        opacity: 0.12;    /* Bem transparente para não poluir */
+    }
+    .floating-right {
+        width: 18vw;      
+        min-width: 80px;  
+        opacity: 0.12;    /* Bem transparente para não poluir */
+    }
+
+    .floating-left { 
+        left: 20px;      /* Positivo (dentro) ao invés de negativo (fora) */
+    } 
+
+    .floating-right { 
+        right: 20px;     /* Positivo (dentro) ao invés de negativo (fora) */
+    }
+}
+
+/* ==========================================================================
+   OTIMIZAÇÃO PARA 4K (Telas gigantes > 2500px)
+   ========================================================================== */
+@media (min-width: 2500px) {
+    body { font-size: 22px; }
+    .container { width: 1500px; border-radius: 25px; }
+    
+    .display {
+        font-size: 6.5em; 
+        padding: 30px 50px;
+        border-width: 3px;
+        border-radius: 18px;
+        min-width: 600px;
+    }
+
+    h1 { font-size: 2.2em; margin-bottom: 40px; }
+
+    .neumorphic-btn {
+        padding: 20px 35px;
+        font-size: 1.3em;
+        border-width: 3px;
+        border-radius: 12px;
+        margin: 0 10px;
+    }
+
+    .set-stop-time {
+        padding: 25px;
+        gap: 20px;
+        border-width: 3px;
+        flex-direction: row;
+    }
+
+    .neumorphic-input {
+        width: 200px;
+        padding: 12px;
+        font-size: 1.1em;
+        border-width: 3px;
+    }
+
+    /* Em telas gigantes, elas podem ficar fora */
+    .floating-left { max-width: 320px; left: -180px; }
+    .floating-right { max-width: 420px; right: -250px; }
+}
+
+/* ==========================================================================
+   AJUSTES FINAIS DE RESPONSIVIDADE
+   ========================================================================== */
+@media (min-width: 600px) and (max-width: 2499px) {
+    .set-stop-time { flex-direction: row; gap: 10px; }
+    .set-stop-time label, .neumorphic-input { margin-bottom: 0; }
+}
+
+@media (max-width: 500px) {
+    /* Em celulares muito pequenos, ajustamos o tamanho */
+    .floating-left { width: 20vw; } .floating-right { width: 33vw; }
+    .display { font-size: 3em; min-width: auto; padding: 15px; }
 }
