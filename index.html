@@ -4,36 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronômetro Hgun</title>
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- LOGOS FLUTUANTES (INVERTIDAS) -->
+    <!-- Exército Brasileiro agora na Esquerda -->
+    <img src="exercito_brasileiro_logo.png" class="floating-logo floating-left" alt="Exército Brasileiro">
+    
+    <!-- HGUN agora na Direita -->
+    <img src="hgun.jpeg" class="floating-logo floating-right" alt="HGUN">
+
+    <!-- OVERLAY DO CRONÔMETRO (Tela Cheia) -->
+    <div id="fullscreenTimer" class="timer-wrapper hidden">
+        <div class="timer-content">
+            <h1>Cronômetro</h1>
+            <div id="display" class="display-big">00:00:00</div>
+            <p class="instruction-text">Toque na tela para voltar</p>
+        </div>
+    </div>
+
+    <!-- CONTROLES -->
     <div class="container neumorphic-shadow">
-
-        <!-- LOGOS DECORATIVAS (não interferem no layout) -->
-        <img src="hgun.jpeg" class="floating-logo floating-left" alt="HGUN">
-        <img src="exercito_brasileiro_logo.png" class="floating-logo floating-right" alt="Exército Brasileiro">
-
-        <div class="main-content">
-
-            <div class="header">
-                <h1>Cronômetro</h1>
-            </div>
-
-            <div id="display" class="display neumorphic-inset">00:00:00</div>
+        <div class="main-content" id="controlsContainer">
             
+            <h2 class="config-title">Configuração</h2>
+
             <div class="controls">
-                <button id="startStopBtn" class="neumorphic-btn start-btn">Iniciar</button>
-                <button id="resetBtn" class="neumorphic-btn reset-btn">Zerar</button>
-                <button id="forwardBtn" class="neumorphic-btn adjust-btn">Avançar 10s</button>
-                <button id="backwardBtn" class="neumorphic-btn adjust-btn">Retroceder 10s</button>
+                <button id="startBtn" class="neumorphic-btn start-btn">Iniciar</button>
             </div>
             
             <div class="set-stop-time neumorphic-shadow">
-                <label for="stopTime">Parar em (HH:MM:SS):</label>
+                <label for="stopTime">Definir Tempo (HH:MM:SS):</label>
                 <input type="text" id="stopTime" placeholder="Ex: 00:01:30" class="neumorphic-input">
-                <button id="setStopBtn" class="neumorphic-btn set-btn">Definir Parada</button>
+                
+                <button id="setStopBtn" class="neumorphic-btn set-btn">Definir Tempo</button>
+                
+                <!-- OPÇÕES DE MODO -->
+                <div class="mode-selection">
+                    <label class="radio-label">
+                        <input type="radio" name="timerMode" value="crescent" checked>
+                        <span class="radio-custom"></span>
+                        Crescente
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="timerMode" value="decrescent">
+                        <span class="radio-custom"></span>
+                        Decrescente
+                    </label>
+                </div>
+
                 <p id="stopMessage"></p>
             </div>
 

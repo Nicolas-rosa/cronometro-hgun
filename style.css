@@ -2,8 +2,8 @@
 :root {
     --bg-color: #ffffff;
     --main-color: #2c3e50;
-    --sidebar-color: #34495e;
     --border-color: #c9d0da;
+    --highlight-color: #3498db;
 }
 
 /* ---------- Layout geral ---------- */
@@ -15,244 +15,319 @@ body {
     min-height: 100vh;
     margin: 0;
     background-color: var(--bg-color);
-    overflow: hidden; /* Isso corta o que sai da tela */
+    overflow: hidden;
 }
 
-.container {
-    position: relative;
-    display: flex;
-    background: var(--bg-color);
-    border-radius: 18px;
-    overflow: visible;
-    width: 800px;
-    max-width: 95%;
-    transition: width 0.3s ease;
-}
-
-/* ---------- Conteúdo principal ---------- */
-.main-content {
-    flex-grow: 1;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2; /* Texto fica ACIMA das logos */
-}
-
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-h1 {
-    color: var(--main-color);
-    font-size: 1.8em;
-    font-weight: 600;
-    margin: 0;
-}
-
-/* ---------- Display ---------- */
-.display {
-    font-size: 4em;
-    padding: 18px 35px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    color: var(--main-color);
-    background: var(--bg-color);
-    border: 2px solid var(--border-color);
-    text-align: center;
-    min-width: 260px;
-}
-
-/* ---------- Botões ---------- */
-.controls {
-    margin-bottom: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-.neumorphic-btn {
-    background: var(--bg-color);
-    border: 2px solid var(--border-color);
-    color: var(--main-color);
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: 0.2s ease;
-}
-
-.neumorphic-btn:hover {
-    background: #dce2eb;
-    transform: translateY(-2px);
-}
-
-.neumorphic-btn:active {
-    transform: translateY(0);
-}
-
-.start-btn { color: #1abc9c; }
-.reset-btn { color: #e74c3c; }
-.adjust-btn { color: #3498db; }
-.set-btn { color: #9b59b6; }
-
-/* ---------- Definir Parada ---------- */
-.set-stop-time {
-    margin-top: 25px;
-    padding: 18px;
-    border-radius: 12px;
-    background: var(--bg-color);
-    border: 2px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.set-stop-time label {
-    color: var(--main-color);
-    margin-bottom: 10px;
-}
-
-.neumorphic-input {
-    padding: 10px;
-    border: 2px solid var(--border-color);
-    background: var(--bg-color);
-    color: var(--main-color);
-    border-radius: 8px;
-    width: 120px;
-    text-align: center;
-    outline: none;
-    font-size: 1rem;
-}
-
-#stopMessage {
-    margin-top: 12px;
-    font-weight: bold;
-    color: #c0392b;
-    font-size: 1.2rem;
-}
-
-@keyframes blinkRed {
-    0%, 100% { color: var(--main-color); background: var(--bg-color); }
-    50% { color: #f31800; background: #ffaaaa; }
-}
-
-.display.blink-red {
-    animation: blinkRed 0.8s infinite;
-}
-
-/* ==================== LOGOS FLUTUANTES (PADRÃO DESKTOP) ==================== */
-
+/* Logos no fundo - Padrão Desktop */
 .floating-logo {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    opacity: 1;          
-    pointer-events: none;   
-    object-fit: contain;
-    z-index: 1; /* Fica ATRÁS do texto */
+    z-index: 1;
+    opacity: 1;
+    transition: all 0.3s ease;
 }
 
-.floating-left {
-    left: -4vw;
-    width: 18vw;
-    max-width: 170px; 
+.floating-left { 
+    left: 5vw; 
+    width: 18vw; 
+    max-width: 200px; 
 }
 
-.floating-right {
-    right: -9vw;
-    width: 20vw;
-    max-width: 240px;
+.floating-right { 
+    right: 5vw; 
+    width: 20vw; 
+    max-width: 240px; 
 }
+
+/* Container Central */
+.container {
+    position: relative;
+    display: flex;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    width: 720px; 
+    max-width: 90%;
+    z-index: 10;
+    transition: opacity 0.5s ease;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.running-mode .container {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- CRONÔMETRO GIGANTE (OVERLAY) --- */
+.timer-wrapper { display: none; }
+.timer-wrapper.active {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: transparent;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.timer-content {
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255,255,255,0.9);
+}
+
+.timer-wrapper h1 {
+    font-size: 2.5em; /* Reduzi um pouco para ficar mais harmônico */
+    margin: 0 0 15px 0;
+    color: var(--main-color);
+}
+
+/* 
+   AQUI ESTÁ A MUDANÇA PRINCIPAL DE PROPORÇÃO 
+   Reduzido de 9em para 7em para ser mais elegante no Desktop padrão
+*/
+.display-big {
+    font-size: 7em; 
+    font-weight: 600; /* Peso da fonte similar ao antigo */
+    color: var(--main-color);
+    line-height: 1;
+    letter-spacing: 2px; /* Um pouco de espaço para elegância */
+}
+
+.instruction-text {
+    margin-top: 25px;
+    color: #555;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.3; }
+}
+
+/* --- Botões e Inputs --- */
+.config-title {
+    color: var(--main-color);
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.neumorphic-btn {
+    background: #ffffff;
+    border: 2px solid var(--border-color);
+    color: var(--main-color);
+    padding: 14px 35px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.15rem;
+    transition: 0.2s;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.2;
+}
+
+.neumorphic-btn:hover { background: #dce2eb; transform: translateY(-2px); }
+.start-btn { color: #1abc9c; border-color: #1abc9c; width: 220px; }
+
+/* Botão definir tempo */
+.set-btn { 
+    color: #9b59b6; 
+    margin-top: 15px; 
+    width: auto;           
+    min-width: 160px;      
+    padding: 12px 25px;    
+    white-space: nowrap;   
+}
+
+.set-stop-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 35px 45px; 
+    background: #fdfdfd;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.neumorphic-input {
+    padding: 14px;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    text-align: center;
+    font-size: 1.2rem;
+    width: 180px;
+}
+
+/* --- Radio Buttons --- */
+.mode-selection {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--main-color);
+    font-size: 1.1rem;
+}
+
+.radio-label input { display: none; }
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    transition: 0.2s;
+}
+
+.radio-label input:checked + .radio-custom {
+    border-color: var(--highlight-color);
+    background-color: #fff;
+}
+
+.radio-label input:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: var(--highlight-color);
+    border-radius: 50%;
+}
+
+#stopMessage {
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+@keyframes blinkRed {
+    0%, 100% { color: var(--main-color); transform: scale(1); }
+    50% { color: #f31800; transform: scale(1.05); }
+}
+.display-big.blink-red { animation: blinkRed 0.8s infinite; }
 
 /* ==========================================================================
-   CORREÇÃO DE CORTE (Telas < 950px)
+   CORREÇÃO CRÍTICA PARA LAPTOPS E TABLETS (Ex: 1024x880)
    ========================================================================== */
-@media (max-width: 950px) {
+@media (max-width: 1366px) {
     /* 
-       Aqui está a correção: Trazemos as logos para DENTRO do container.
-       Elas ficarão como "marca d'água" atrás do texto, sem serem cortadas.
+       Ajustamos o container para não bater nas logos 
     */
+    .container {
+        width: 50vw;
+        border-radius: 15px;
+    }
+
+    .main-content { padding: 30px; }
+    .neumorphic-btn { padding: 10px 25px; font-size: 1rem; }
+    .start-btn { width: 180px; }
+    .set-stop-time { padding: 20px; }
+    .neumorphic-input { padding: 10px; width: 140px; font-size: 1rem; }
+    .config-title { margin-bottom: 15px; font-size: 1.5em; }
+
+    /* Reduzimos as logos */
     .floating-left {
-        width: 16vw;      
-        min-width: 80px;  
-        opacity: 0.12;    /* Bem transparente para não poluir */
+        width: 20vw; 
+        max-width: 140px; 
+        margin-right: 5px;
     }
-    .floating-right {
-        width: 18vw;      
-        min-width: 80px;  
-        opacity: 0.12;    /* Bem transparente para não poluir */
+     .floating-right {
+        width: 13vw; 
+        max-width: 120px; 
+        margin-left: 5px;
     }
 
-    .floating-left { 
-        left: 20px;      /* Positivo (dentro) ao invés de negativo (fora) */
-    } 
-
-    .floating-right { 
-        right: 20px;     /* Positivo (dentro) ao invés de negativo (fora) */
+    /* 
+       AQUI ESTÁ A CORREÇÃO DE PROPORÇÃO DO CRONÔMETRO
+       Reduzido para 5em (era 9em). Isso é próximo ao 4em antigo,
+       mas com destaque suficiente para tela cheia sem estourar a tela.
+    */
+    .display-big { 
+        font-size: 5em; 
     }
-}
-
-/* ==========================================================================
-   OTIMIZAÇÃO PARA 4K (Telas gigantes > 2500px)
-   ========================================================================== */
-@media (min-width: 2500px) {
-    body { font-size: 22px; }
-    .container { width: 1500px; border-radius: 25px; }
     
-    .display {
-        font-size: 6.5em; 
-        padding: 30px 50px;
-        border-width: 3px;
-        border-radius: 18px;
-        min-width: 600px;
+    .timer-wrapper h1 {
+        font-size: 2em;
     }
-
-    h1 { font-size: 2.2em; margin-bottom: 40px; }
-
-    .neumorphic-btn {
-        padding: 20px 35px;
-        font-size: 1.3em;
-        border-width: 3px;
-        border-radius: 12px;
-        margin: 0 10px;
-    }
-
-    .set-stop-time {
-        padding: 25px;
-        gap: 20px;
-        border-width: 3px;
-        flex-direction: row;
-    }
-
-    .neumorphic-input {
-        width: 200px;
-        padding: 12px;
-        font-size: 1.1em;
-        border-width: 3px;
-    }
-
-    /* Em telas gigantes, elas podem ficar fora */
-    .floating-left { max-width: 320px; left: -180px; }
-    .floating-right { max-width: 420px; right: -250px; }
 }
 
 /* ==========================================================================
-   AJUSTES FINAIS DE RESPONSIVIDADE
+   CELULARES
    ========================================================================== */
-@media (min-width: 600px) and (max-width: 2499px) {
-    .set-stop-time { flex-direction: row; gap: 10px; }
-    .set-stop-time label, .neumorphic-input { margin-bottom: 0; }
+@media (max-width: 600px) {
+    .container { width: 95%; }
+    .display-big { font-size: 3.5em; } /* Menor ainda para mobile */
+    .floating-left, .floating-right { opacity: 0.15; }
 }
 
-@media (max-width: 500px) {
-    /* Em celulares muito pequenos, ajustamos o tamanho */
-    .floating-left { width: 20vw; } .floating-right { width: 33vw; }
-    .display { font-size: 3em; min-width: auto; padding: 15px; }
+/* ==========================================================================
+   MÉDIA RESOLUÇÃO (Notebooks, Full HD até 2K)
+   Faixa: 1366px até 2499px
+   ========================================================================== */
+@media (min-width: 1366px) and (max-width: 2499px) {
+    
+
+    .floating-left {
+        width: 20vw;
+        max-width: 300px; /* Um pouco maior que o padrão */
+        left: 5vw;      /* Afasta do container, mas seguro para 1366px */
+    }
+
+    .floating-right {
+        width: 16vw;
+        max-width: 200px; /* Um pouco maior que o padrão */
+        right: 5vw;    /* Afasta do container, mas seguro para 1366px */
+    }
+}
+
+/* ==========================================================================
+   4K (Telas gigantes > 2100px)
+   ========================================================================== */
+@media (min-width: 2100px) {
+    html { font-size: 26px; }
+    .container { width: 1100px; max-width: 60vw; border-radius: 35px; }
+    .neumorphic-btn { border-width: 3px; font-weight: 700; }
+    .floating-left { width: 20vw; max-width: 400px; left: 5vw; }
+    .floating-right { width: 12vw; max-width: 400px; right: 5vw; }
+    
+    /* 
+       Ajuste proporcional para 4K também 
+       Reduzido de 14em para 11em
+    */
+    .display-big { font-size: 11em; } 
 }
