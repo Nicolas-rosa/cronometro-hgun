@@ -9,18 +9,19 @@
 </head>
 <body>
 
-    <!-- LOGOS FLUTUANTES (INVERTIDAS) -->
-    <!-- Exército Brasileiro agora na Esquerda -->
+    <!-- LOGOS FLUTUANTES -->
     <img src="7rm.jpeg" class="floating-logo floating-left" alt="Exército Brasileiro">
-    
-    <!-- HGUN agora na Direita -->
     <img src="hgun.jpeg" class="floating-logo floating-right" alt="HGUN">
 
     <!-- OVERLAY DO CRONÔMETRO (Tela Cheia) -->
     <div id="fullscreenTimer" class="timer-wrapper hidden">
         <div class="timer-content">
-           
             <div id="display" class="display-big">00:00:00</div>
+            
+            <!-- MENSAGEM DE TEMPO RESTANTE (PISCADA AMARELA) -->
+            <p id="fullscreenMsg" class="instruction-text extra-msg"></p>
+            
+            <!-- INSTRUÇÃO PADRÃO -->
             <p class="instruction-text">Toque na tela para voltar</p>
         </div>
     </div>
@@ -31,17 +32,24 @@
             
             <h2 class="config-title">Configuração</h2>
 
-            <div class="controls">
-                <button id="startBtn" class="neumorphic-btn start-btn">Iniciar</button>
-            </div>
-            
-            <div class="set-stop-time neumorphic-shadow">
-                <label for="stopTime">Definir Tempo (HH:MM:SS):</label>
-                <input type="text" id="stopTime" placeholder="Ex: 00:01:30" class="neumorphic-input">
-                
-                <button id="setStopBtn" class="neumorphic-btn set-btn">Definir Tempo</button>
-                
-                <!-- OPÇÕES DE MODO -->
+            <div class="time-setup-area">
+                <div class="time-inputs-row">
+                    <div class="input-group">
+                        <label>HORAS</label>
+                        <input type="number" id="inHours" min="0" placeholder="00" class="time-box">
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="input-group">
+                        <label>MINUTOS</label>
+                        <input type="number" id="inMinutes" min="0" max="59" placeholder="00" class="time-box">
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="input-group">
+                        <label>SEGUNDOS</label>
+                        <input type="number" id="inSeconds" min="0" max="59" placeholder="00" class="time-box">
+                    </div>
+                </div>
+
                 <div class="mode-selection">
                     <label class="radio-label">
                         <input type="radio" name="timerMode" value="crescent" checked>
@@ -56,6 +64,10 @@
                 </div>
 
                 <p id="stopMessage"></p>
+            </div>
+
+            <div class="controls">
+                <button id="startBtn" class="neumorphic-btn start-btn">Iniciar</button>
             </div>
 
         </div>
